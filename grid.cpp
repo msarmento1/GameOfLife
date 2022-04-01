@@ -2,6 +2,7 @@
 
 #include <stdexcept>
 
+namespace gol {
 Grid::Grid(const uint32_t rows, const uint32_t columns) {
   if (rows < 0) {
     throw std::invalid_argument("rows should be greater than zero");
@@ -14,7 +15,8 @@ Grid::Grid(const uint32_t rows, const uint32_t columns) {
   cells_.resize(rows, std::vector<Cell>(columns));
 }
 
-void Grid::SetState(uint32_t x, uint32_t y, const Cell::State state) {
+void Grid::set_state(const uint32_t x, const uint32_t y,
+                     const Cell::State state) {
   if (x > cells_.size()) {
     throw std::invalid_argument("invalid x value: " + std::to_string(y));
   }
@@ -28,3 +30,4 @@ void Grid::SetState(uint32_t x, uint32_t y, const Cell::State state) {
 
 const std::vector<std::vector<Cell>> &Grid::cells() const { return cells_; }
 std::vector<std::vector<Cell>> &Grid::cells() { return cells_; }
+}  // namespace gol

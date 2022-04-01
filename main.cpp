@@ -1,13 +1,13 @@
+#include <iostream>
+#include <random>
+
 #include "console_grid_displayer.hpp"
 #include "grid.hpp"
 #include "player.hpp"
 
-#include <iostream>
-#include <random>
-
 int main(int argc, char *argv[]) {
   try {
-    Grid grid(10, 5);
+    gol::Grid grid(10, 10);
 
     std::random_device dev;
     std::mt19937 rng(dev());
@@ -16,16 +16,17 @@ int main(int argc, char *argv[]) {
     for (auto &columns : grid.cells()) {
       for (auto &cell : columns) {
         if (dist(rng)) {
-          cell = Cell::State::kAlive;
+          cell = gol::Cell::State::kAlive;
         }
       }
     }
 
-    ConsoleGridDisplayer consoleGridDisplayer;
+    auto console_grid_displayer =
+        std::make_shared<gol::ConsoleGridDisplayer>();
 
     // Create your own GridDisplayer and pass it to Player
-    Player player(grid, consoleGridDisplayer);
-    player.Play();
+    gol::Player player(grid, console_grid_displayer);
+    player.play(100ms);
   } catch (const std::exception &e) {
     std::cerr << e.what() << '\n';
   }

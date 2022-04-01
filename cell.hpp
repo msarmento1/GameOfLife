@@ -1,12 +1,14 @@
 #pragma once
 
+namespace gol {
 class Cell {
-public:
+ public:
   enum class State { kAlive, kDead };
 
   bool operator==(const State &state) const;
   Cell &operator=(const State &state);
 
-private:
+ private:
   State state_ = State::kDead;
 };
+}  // namespace gol

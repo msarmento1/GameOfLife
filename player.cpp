@@ -3,65 +3,65 @@
 #include <algorithm>
 #include <thread>
 
-Player::Player(Grid &grid, GridDisplayer &grid_displayer)
-    : grid_(grid), grid_displayer_(&grid_displayer) {}
+namespace gol {
+Player::Player(const Grid &grid, std::shared_ptr<GridDisplayer> grid_displayer)
+    : grid_(grid), grid_displayer_(grid_displayer) {}
 
-void Player::Play(const std::chrono::milliseconds &refresh_rate) {
+void Player::play(const std::chrono::milliseconds &refresh_rate) {
   while (true) {
-    const auto gameEnded =
-        std::all_of(std::begin(grid_.cells()), std::end(grid_.cells()),
-                    [](const auto &row) {
-                      return std::all_of(std::begin(row), std::end(row),
-                                         [](const auto &cell) {
-                                           return cell == Cell::State::kDead;
-                                         });
-                    });
+    const auto game_ended = std::all_of(
+        std::begin(grid_.cells()), std::end(grid_.cells()),
+        [](const auto &row) {
+          return std::all_of(
+              std::begin(row), std::end(row),
+              [](const auto &cell) { return cell == Cell::State::kDead; });
+        });
 
-    if (gameEnded) {
-      grid_displayer_->DisplayEndOfGame(round_);
+    if (game_ended) {
+      grid_displayer_->display_end_of_game(round_);
       return;
     }
 
-    grid_displayer_->Display(grid_);
+    grid_displayer_->display(grid_);
     std::this_thread::sleep_for(refresh_rate);
-    RunRound();
+    run_round_();
   }
 }
 
-void Player::RunRound() {
+void Player::run_round_() {
   // #1 - Any live cell with two or three live neighbours survives.
   // #2 - Any dead cell with three live neighbours becomes a live cell.
   // #3 - All other live cells die in the next generation. Similarly, all other
   // dead cells stay dead.
 
-  const auto nRows = grid_.cells().size();
-  const auto nColumns = grid_.cells()[0].size();
+  const auto n_rows = grid_.cells().size();
+  const auto n_columns = grid_.cells()[0].size();
 
-  auto newGrid(grid_);
+  auto new_grid(grid_);
 
-  for (size_t i = 0; i < nRows; ++i) {
-    for (size_t j = 0; j < nColumns; ++j) {
-      const auto aliveNeighbours = CountAliveNeighbours(i, j);
+  for (size_t i = 0; i < n_rows; ++i) {
+    for (size_t j = 0; j < n_columns; ++j) {
+      const auto alive_neighbours = count_alive_neighbours_(i, j);
 
       if (grid_.cells()[i][j] == Cell::State::kAlive) {
-        if (aliveNeighbours != 2 && aliveNeighbours != 3) {
-          newGrid.SetState(i, j, Cell::State::kDead);
+        if (alive_neighbours != 2 && alive_neighbours != 3) {
+          new_grid.set_state(i, j, Cell::State::kDead);
         }
       } else {
-        if (aliveNeighbours == 3) {
-          newGrid.SetState(i, j, Cell::State::kAlive);
+        if (alive_neighbours == 3) {
+          new_grid.set_state(i, j, Cell::State::kAlive);
         }
       }
     }
   }
 
-  grid_ = newGrid;
+  grid_ = new_grid;
   ++round_;
 }
 
-uint8_t Player::CountAliveNeighbours(const uint32_t x, const uint32_t y) {
-  const auto nRows = grid_.cells().size();
-  const auto nColumns = grid_.cells()[0].size();
+uint8_t Player::count_alive_neighbours_(const uint32_t x, const uint32_t y) {
+  const auto n_rows = grid_.cells().size();
+  const auto n_columns = grid_.cells()[0].size();
 
   uint8_t counter = 0;
 
@@ -71,7 +71,7 @@ uint8_t Player::CountAliveNeighbours(const uint32_t x, const uint32_t y) {
         continue;
       }
 
-      if (i >= 0 && i <= nRows - 1 && j >= 0 && j <= nColumns - 1) {
+      if (i >= 0 && i <= n_rows - 1 && j >= 0 && j <= n_columns - 1) {
         counter += (grid_.cells()[i][j] == Cell::State::kAlive) ? 1 : 0;
       }
     }
@@ -79,3 +79,4 @@ uint8_t Player::CountAliveNeighbours(const uint32_t x, const uint32_t y) {
 
   return counter;
 }
+}  // namespace gol

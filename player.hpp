@@ -1,23 +1,26 @@
 #pragma once
 
-#include "grid.hpp"
-#include "grid_displayer.hpp"
-
 #include <chrono>
 #include <memory>
 
+#include "grid.hpp"
+#include "grid_displayer.hpp"
+
+using namespace std::chrono_literals;
+
+namespace gol {
 class Player {
-public:
-  Player(Grid &grid, GridDisplayer &grid_displayer);
+ public:
+  Player(const Grid& grid, std::shared_ptr<GridDisplayer> grid_displayer);
 
-  void Play(const std::chrono::milliseconds &refresh_rate =
-                std::chrono::milliseconds(500));
+  void play(const std::chrono::milliseconds& refresh_rate = 500ms);
 
-private:
-  void RunRound();
-  uint8_t CountAliveNeighbours(const uint32_t x, const uint32_t y);
+ private:
+  void run_round_();
+  uint8_t count_alive_neighbours_(const uint32_t x, const uint32_t y);
 
-  Grid &grid_;
-  GridDisplayer *grid_displayer_;
+  Grid grid_;
+  std::shared_ptr<GridDisplayer> grid_displayer_;
   uint32_t round_ = 0;
 };
+}  // namespace gol

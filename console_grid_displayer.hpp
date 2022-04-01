@@ -1,11 +1,13 @@
 #pragma once
 
-#include "grid_displayer.hpp"
-
 #include <iostream>
 
-class ConsoleGridDisplayer : public GridDisplayer {
-public:
-  void Display(const Grid &grid) override;
-  void DisplayEndOfGame(const uint32_t rounds) override;
+#include "grid_displayer.hpp"
+
+namespace gol {
+class ConsoleGridDisplayer final : public GridDisplayer {
+ public:
+  void display(const Grid &grid) override;
+  void display_end_of_game(const uint32_t rounds) override;
 };
+}  // namespace gol
