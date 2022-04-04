@@ -5,7 +5,7 @@
 
 #include "cell.hpp"
 
-namespace gol {
+namespace mms {
 class Grid {
  public:
   Grid(const uint32_t rows, const uint32_t columns);
@@ -17,4 +17,4 @@ class Grid {
  private:
   std::vector<std::vector<Cell>> cells_;
 };
-}  // namespace gol
+}  // namespace mms

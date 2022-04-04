@@ -2,7 +2,7 @@
 
 #include "grid.hpp"
 
-namespace gol {
+namespace mms {
 class GridDisplayer {
  public:
   virtual void display(const Grid &grid) = 0;

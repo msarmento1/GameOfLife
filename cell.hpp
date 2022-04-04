@@ -1,6 +1,6 @@
 #pragma once
 
-namespace gol {
+namespace mms {
 class Cell {
  public:
   enum class State { kAlive, kDead };
@@ -11,4 +11,4 @@ class Cell {
  private:
   State state_ = State::kDead;
 };
-}  // namespace gol
+}  // namespace mms

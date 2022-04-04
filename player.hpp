@@ -4,11 +4,11 @@
 #include <memory>
 
 #include "grid.hpp"
-#include "grid_displayer.hpp"
+#include "displayer/grid_displayer.hpp"
 
 using namespace std::chrono_literals;
 
-namespace gol {
+namespace mms {
 class Player {
  public:
   Player(const Grid& grid, std::shared_ptr<GridDisplayer> grid_displayer);
@@ -23,4 +23,4 @@ class Player {
   std::shared_ptr<GridDisplayer> grid_displayer_;
   uint32_t round_ = 0;
 };
-}  // namespace gol
+}  // namespace mms

@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-namespace gol {
+namespace mms {
 Grid::Grid(const uint32_t rows, const uint32_t columns) {
   if (rows < 0) {
     throw std::invalid_argument("rows should be greater than zero");
@@ -30,4 +30,4 @@ void Grid::set_state(const uint32_t x, const uint32_t y,
 
 const std::vector<std::vector<Cell>> &Grid::cells() const { return cells_; }
 std::vector<std::vector<Cell>> &Grid::cells() { return cells_; }
-}  // namespace gol
+}  // namespace mms

@@ -1,11 +1,16 @@
 #include "player.hpp"
 
 #include <algorithm>
+#include <stdexcept>
 #include <thread>
 
-namespace gol {
+namespace mms {
 Player::Player(const Grid &grid, std::shared_ptr<GridDisplayer> grid_displayer)
-    : grid_(grid), grid_displayer_(grid_displayer) {}
+    : grid_(grid), grid_displayer_(grid_displayer) {
+  if (grid_displayer == nullptr) {
+    throw std::runtime_error("grid displayer is null");
+  }
+}
 
 void Player::play(const std::chrono::milliseconds &refresh_rate) {
   while (true) {
@@ -55,8 +60,8 @@ void Player::run_round_() {
     }
   }
 
-  grid_ = new_grid;
   ++round_;
+  grid_ = new_grid;
 }
 
 uint8_t Player::count_alive_neighbours_(const uint32_t x, const uint32_t y) {
@@ -79,4 +84,4 @@ uint8_t Player::count_alive_neighbours_(const uint32_t x, const uint32_t y) {
 
   return counter;
 }
-}  // namespace gol
+}  // namespace mms

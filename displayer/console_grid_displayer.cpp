@@ -1,16 +1,18 @@
 #include "console_grid_displayer.hpp"
 
-std::ostream &operator<<(std::ostream &os, const gol::Cell &cell) {
-  if (cell == gol::Cell::State::kAlive) {
+#include <iostream>
+
+std::ostream &operator<<(std::ostream &os, const mms::Cell &cell) {
+  if (cell == mms::Cell::State::kAlive) {
     os << 'o';
-  } else if (cell == gol::Cell::State::kDead) {
+  } else if (cell == mms::Cell::State::kDead) {
     os << ' ';
   }
 
   return os;
 }
 
-namespace gol {
+namespace mms {
 void ConsoleGridDisplayer::display(const Grid &grid) {
   const auto n_rows = grid.cells().size();
   const auto n_columns = grid.cells()[0].size();
