@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 
     for (auto &columns : grid.cells()) {
       for (auto &cell : columns) {
-        if (dist(rng)) {
+        if (dist(rng) != 0U) {
           cell = mms::Cell::State::kAlive;
         }
       }

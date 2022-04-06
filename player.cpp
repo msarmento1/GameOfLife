@@ -5,7 +5,8 @@
 #include <thread>
 
 namespace mms {
-Player::Player(const Grid &grid, std::shared_ptr<GridDisplayer> grid_displayer)
+Player::Player(const Grid &grid,
+               const std::shared_ptr<GridDisplayer> &grid_displayer)
     : grid_(grid), grid_displayer_(grid_displayer) {
   if (grid_displayer == nullptr) {
     throw std::runtime_error("grid displayer is null");
@@ -70,8 +71,8 @@ uint8_t Player::count_alive_neighbours_(const uint32_t x, const uint32_t y) {
 
   uint8_t counter = 0;
 
-  for (int i = x - 1; i <= x + 1; ++i) {
-    for (int j = y - 1; j <= y + 1; ++j) {
+  for (uint32_t i = x - 1; i <= x + 1; ++i) {
+    for (uint32_t j = y - 1; j <= y + 1; ++j) {
       if (i == x && j == y) {
         continue;
       }

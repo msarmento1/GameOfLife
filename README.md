@@ -3,6 +3,8 @@
 My implementation of Game of Life using the best practices of C++.
 
 ## Build
+`clang-tidy` is required
+
 `$ mkdir build`
 
 `$ cd build`
@@ -17,11 +19,11 @@ My implementation of Game of Life using the best practices of C++.
 `$ bin/GameOfLife`
 
 ## Ncurses
-Might need to export the following environment variables in your .bashrc
+Might need to export the following environment variables to your .bashrc:
 
 `export TERMINFO=/usr/share/terminfo`
 
 `export TERM=xterm-basic`
 
-## Clang-format
+## Coding style used (clang-format)
 Google

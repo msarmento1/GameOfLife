@@ -40,4 +40,4 @@ void ConsoleGridDisplayer::display_end_of_game(const uint32_t rounds) {
 
   std::cout << "Number of rounds: " << rounds << "\n";
 }
-}
+}  // namespace mms

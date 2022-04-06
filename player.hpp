@@ -3,15 +3,16 @@
 #include <chrono>
 #include <memory>
 
-#include "grid.hpp"
 #include "displayer/grid_displayer.hpp"
+#include "grid.hpp"
 
 using namespace std::chrono_literals;
 
 namespace mms {
 class Player {
  public:
-  Player(const Grid& grid, std::shared_ptr<GridDisplayer> grid_displayer);
+  Player(const Grid& grid,
+         const std::shared_ptr<GridDisplayer>& grid_displayer);
 
   void play(const std::chrono::milliseconds& refresh_rate = 500ms);
 
