@@ -21,24 +21,21 @@ void NcursesGridDisplayer::display(const Grid &grid) {
 
   move(0, 0);
 
-  printw("+%s+\n", std::string((n_columns * 2) - 1, '-').c_str());
+  printw("+%s+\n", std::string(n_columns, '-').c_str());
 
   for (size_t i = 0; i < n_rows; ++i) {
+    printw("|");
     for (size_t j = 0; j < n_columns; ++j) {
-      printw("|");
       if (grid.cells()[i][j] == mms::Cell::State::kAlive) {
         printw("o");
       } else if (grid.cells()[i][j] == mms::Cell::State::kDead) {
         printw(" ");
       }
-
-      if (j == n_columns - 1) {
-        printw("|\n");
-      }
     }
+    printw("|\n");
   }
 
-  printw("+%s+\n", std::string((n_columns * 2) - 1, '-').c_str());
+  printw("+%s+\n", std::string(n_columns, '-').c_str());
 
   refresh();
 }
@@ -55,4 +52,4 @@ void NcursesGridDisplayer::display_end_of_game(const uint32_t rounds) {
   printw("Number of rounds: %i\n", rounds);
   refresh();
 }
-}  // namespace mms
+} // namespace mms

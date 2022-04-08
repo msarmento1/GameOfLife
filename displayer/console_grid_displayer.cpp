@@ -17,19 +17,17 @@ void ConsoleGridDisplayer::display(const Grid &grid) {
   const auto n_rows = grid.cells().size();
   const auto n_columns = grid.cells()[0].size();
 
-  std::cout << "+" << std::string((n_columns * 2) - 1, '-') << "+\n";
+  std::cout << "+" << std::string(n_columns, '-') << "+\n";
 
   for (size_t i = 0; i < n_rows; ++i) {
+    std::cout << "|";
     for (size_t j = 0; j < n_columns; ++j) {
-      std::cout << "|" << grid.cells()[i][j];
-
-      if (j == n_columns - 1) {
-        std::cout << "|\n";
-      }
+      std::cout << grid.cells()[i][j];
     }
+    std::cout << "|\n";
   }
 
-  std::cout << "+" << std::string((n_columns * 2) - 1, '-') << "+\n";
+  std::cout << "+" << std::string(n_columns, '-') << "+\n";
 }
 
 void ConsoleGridDisplayer::display_end_of_game(const uint32_t rounds) {
@@ -40,4 +38,4 @@ void ConsoleGridDisplayer::display_end_of_game(const uint32_t rounds) {
 
   std::cout << "Number of rounds: " << rounds << "\n";
 }
-}  // namespace mms
+} // namespace mms

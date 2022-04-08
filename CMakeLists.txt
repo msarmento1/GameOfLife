@@ -11,6 +11,8 @@ conan_basic_setup()
 
 include_directories(${CMAKE_SOURCE_DIR})
 
+find_package(Boost 1.78.0 REQUIRED COMPONENTS program_options)
+
 add_executable (${PROJECT_NAME} cell.cpp displayer/console_grid_displayer.cpp displayer/ncurses_grid_displayer.cpp grid.cpp main.cpp player.cpp)
-target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${CONAN_LIBS_NCURSES} Boost::program_options)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)

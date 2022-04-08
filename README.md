@@ -19,7 +19,7 @@ My implementation of Game of Life using the best practices of C++.
 `$ bin/GameOfLife`
 
 ## Ncurses
-Might need to export the following environment variables to your .bashrc:
+Install package `ncurses-term` and export the following environment variables to your .bashrc:
 
 `export TERMINFO=/usr/share/terminfo`
 
