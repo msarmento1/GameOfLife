@@ -14,7 +14,7 @@ class Player {
   Player(const Grid& grid,
          const std::shared_ptr<GridDisplayer>& grid_displayer);
 
-  void play(const std::chrono::milliseconds& refresh_rate = 500ms);
+  void play(const std::chrono::milliseconds& refresh_rate);
 
  private:
   void run_round_();

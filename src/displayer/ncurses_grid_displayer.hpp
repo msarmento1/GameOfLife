@@ -6,7 +6,7 @@ namespace mms {
 class NcursesGridDisplayer final : public GridDisplayer {
  public:
   NcursesGridDisplayer();
-  ~NcursesGridDisplayer();
+  virtual ~NcursesGridDisplayer();
   void display(const Grid &grid) override;
   void display_end_of_game(const uint32_t rounds) override;
 };

@@ -13,6 +13,8 @@
 
 namespace bpo = boost::program_options;
 
+#define DEFAULT_REFRESH_RATE 100
+
 int main(int argc, char *argv[]) {
   try {
     bpo::options_description desc{"Options"};
@@ -26,7 +28,7 @@ int main(int argc, char *argv[]) {
         bpo::value<uint16_t>()->default_value(
           mms::GridDisplayer::Options::kNcurses),
           "Displayer")
-      ("refresh-rate", bpo::value<int64_t>()->default_value(100),
+      ("refresh-rate", bpo::value<int64_t>()->default_value(DEFAULT_REFRESH_RATE),
        "Refresh rate in millisseconds");
     // clang-format on
 

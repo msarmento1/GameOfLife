@@ -3,6 +3,8 @@
 My implementation of Game of Life using the best practices of C++.
 
 ## Build
+Change your `~/.conan/profile/default` compiler option to `compiler.libcxx=libstdc++11`
+
 `clang-tidy` is required
 
 `$ mkdir build`

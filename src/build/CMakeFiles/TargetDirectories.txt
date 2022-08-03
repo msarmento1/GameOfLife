@@ -1,0 +1,3 @@
+/home/msarmento/Projects/GameOfLife/src/build/CMakeFiles/GameOfLife.dir
+/home/msarmento/Projects/GameOfLife/src/build/CMakeFiles/edit_cache.dir
+/home/msarmento/Projects/GameOfLife/src/build/CMakeFiles/rebuild_cache.dir

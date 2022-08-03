@@ -5,6 +5,9 @@
 namespace mms {
 class GridDisplayer {
 public:
+  GridDisplayer() = default;
+  virtual ~GridDisplayer() = default;
+
   enum Options { kConsole = 0, kNcurses };
 
   virtual void display(const Grid &grid) = 0;
